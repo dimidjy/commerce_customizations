@@ -1,0 +1,16 @@
+<?php
+
+/**
+ * @file
+ */
+
+/**
+ * Implements hook_views_data_alter().
+ */
+function app_core_views_data_alter(array &$data) {
+  $data['commerce_order_item']['edit_quantity_dialog']['field'] = [
+    'title' => t('Quantity text field dialog'),
+    'help' => t('Adds form with field for editing the quantity.'),
+    'id' => 'commerce_order_item_edit_quantity_dialog',
+  ];
+}

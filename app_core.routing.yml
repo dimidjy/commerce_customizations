@@ -1,0 +1,12 @@
+app_core.quantity_edit:
+  path: '/app/quantity-edit/{order_item}'
+  defaults:
+    _form: '\Drupal\app_core\Form\EditQuantityForm'
+    _title: 'Edit item quantity'
+  requirements:
+    _access: 'TRUE'
+  options:
+    parameters:
+      sector:
+        type: entity:commerce_order_item
+
