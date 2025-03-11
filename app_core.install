@@ -1,0 +1,41 @@
+<?php
+
+/**
+ * Implements hook_install().
+ */
+function app_core_install() {
+  $vocabulary_name = 'subscription_type';
+
+  if (!\Drupal\taxonomy\Entity\Vocabulary::load($vocabulary_name)) {
+    $vocabulary = \Drupal\taxonomy\Entity\Vocabulary::create([
+      'vid' => $vocabulary_name,
+      'name' => 'Subscription Type',
+    ]);
+    $vocabulary->save();
+  }
+
+  $vocabulary = \Drupal\taxonomy\Entity\Vocabulary::load($vocabulary_name);
+
+  $terms = [
+    'general_member' => 'General',
+    'pro_member' => 'Pro',
+  ];
+
+  foreach ($terms as $machine_name => $name) {
+    $term_exists = \Drupal::entityTypeManager()
+      ->getStorage('taxonomy_term')
+      ->loadByProperties([
+        'name' => $name,
+        'vid' => $vocabulary_name,
+      ]);
+
+    if (empty($term_exists)) {
+      $term = \Drupal\taxonomy\Entity\Term::create([
+        'vid' => $vocabulary_name,
+        'name' => $name,
+        'machine_name' => $machine_name,
+      ]);
+      $term->save();
+    }
+  }
+}

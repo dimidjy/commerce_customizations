@@ -1,0 +1,5 @@
+services:
+  app_core.checkout_complete_subscriber:
+    class: Drupal\app_core\EventSubscriber\CheckoutCompleteSubscriber
+    tags:
+      - { name: event_subscriber }

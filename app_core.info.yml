@@ -1,0 +1,7 @@
+name: 'App core'
+description: 'The app module with core functional'
+package: app
+type: module
+core_version_requirement: '^10'
+core: 10.x
+version: !!float 1
